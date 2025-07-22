@@ -27,11 +27,10 @@
     body {
       margin: 0;
       font-family: 'Montserrat', sans-serif;
-      background: var(--bg);
+      background-color: var(--bg);
       color: var(--text);
-      transition: 0.3s all ease;
+      transition: background-color 0.5s ease, color 0.5s ease, opacity 1s ease-in;
       opacity: 0;
-      transition: opacity 1s ease-in;
     }
 
     body.loaded {
@@ -75,7 +74,7 @@
       margin: 10px 5px;
       cursor: pointer;
       border: none;
-      transition: 0.3s;
+      transition: background-color 0.3s ease, color 0.3s ease;
       display: inline-block;
     }
 
@@ -98,10 +97,12 @@
 
     .card {
       background-color: var(--card);
+      color: var(--text);
       padding: 25px;
       border-radius: 15px;
       margin-bottom: 30px;
       box-shadow: 0 0 15px rgba(0,0,0,0.2);
+      transition: background-color 0.5s ease, color 0.5s ease;
     }
 
     .iframe-wrapper {
@@ -110,7 +111,6 @@
       box-shadow: 0 0 20px rgba(165, 94, 255, 0.2);
     }
 
-    /* Скрыть Discord iframe на мобильных */
     @media (max-width: 768px) {
       .iframe-wrapper {
         display: none;
@@ -131,6 +131,7 @@
       text-align: center;
       padding: 30px;
       color: var(--muted);
+      transition: color 0.5s ease;
     }
   </style>
 </head>
@@ -178,7 +179,7 @@
         <a href="https://discord.com/users/975428275071496233" target="_blank" rel="noopener noreferrer" style="color: #b71cd5;">William Mirelle</a></p>
       <p><strong>🎥 Media:</strong>
         <a href="https://discord.com/users/919323073335943238" target="_blank" rel="noopener noreferrer" style="color: #b71cd5;">Allexo Mirelle</a></p>
-      </div>
+    </div>
   </section>
 
   <section>
@@ -224,3 +225,4 @@
 
 </body>
 </html>
+
