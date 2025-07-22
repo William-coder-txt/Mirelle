@@ -167,7 +167,7 @@
     <img src="https://i.yapx.ru/aAXrP.png" class="logo"/>
     <h1>Mirelle Family</h1>
     <p>Добро пожаловать в элитную фаму Majestic RP</p>
-    <a href="https://discord.gg/FRaZCECpeh" class="btn-discord" target="_blank">Вступить в Discord</a>
+    <a href="https://discord.gg/FRaZCECpeh" class="btn-discord" target="_blank" rel="noopener noreferrer">Вступить в Discord</a>
     <button class="btn-apply" onclick="openModal()">Подать заявку</button>
     <button class="btn-toggle" onclick="toggleTheme()">🌙/☀️</button>
   </header>
@@ -195,13 +195,13 @@
     <h2>Состав</h2>
     <div class="card">
       <p><strong>👑 Owners:</strong>
-        <a href="https://discord.com/users/311386777120407552" target="_blank" style="color: #b71cd5;">Steve Mirelle</a> |
-        <a href="https://discord.com/users/1146906900751978637" target="_blank" style="color: #b71cd5;">Hunter Mirelle</a>
+        <a href="https://discord.com/users/311386777120407552" target="_blank" rel="noopener noreferrer" style="color: #b71cd5;">Steve Mirelle</a> |
+        <a href="https://discord.com/users/1146906900751978637" target="_blank" rel="noopener noreferrer" style="color: #b71cd5;">Hunter Mirelle</a>
       </p>
       <p><strong>🛡 Co. Owner:</strong>
-        <a href="https://discord.com/users/613099862891692032" target="_blank" style="color: #b71cd5;">Felix Mirelle</a></p>
+        <a href="https://discord.com/users/613099862891692032" target="_blank" rel="noopener noreferrer" style="color: #b71cd5;">Felix Mirelle</a></p>
       <p><strong>🧠 DC Moderator:</strong>
-        <a href="https://discord.com/users/975428275071496233" target="_blank" style="color: #b71cd5;">William Mirelle</a></p>
+        <a href="https://discord.com/users/975428275071496233" target="_blank" rel="noopener noreferrer" style="color: #b71cd5;">William Mirelle</a></p>
     </div>
   </section>
 
@@ -227,7 +227,8 @@
     <div class="modal-content">
       <span class="close" onclick="closeModal()">&times;</span>
       <h3>Заявка на вступление</h3>
-      <form onsubmit="submitForm(event)">
+      <!-- Добавлен id формы и убран inline onsubmit -->
+      <form id="applyForm">
         <input type="text" placeholder="Твой ник в Discord" id="discord" required />
         <input type="text" placeholder="Возраст" id="age" required />
         <textarea placeholder="Расскажи о себе и опыте в RP" id="about" required></textarea>
@@ -247,31 +248,43 @@
       document.body.classList.toggle('light');
     }
 
-    async function submitForm(e) {
-      e.preventDefault();
-      
-      const discord = document.getElementById("discord").value;
-      const age = document.getElementById("age").value;
-      const about = document.getElementById("about").value;
+    // Повесим обработчик после загрузки страницы
+    document.addEventListener('DOMContentLoaded', () => {
+      const form = document.getElementById('applyForm');
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
 
-      const response = await fetch("https://script.google.com/macros/s/AKfycbwNxHT5yR_O-I7qOzxjwQI_bUyXw9f8cFun3jaz5TyGD8Au9nebaWA3cbasLBiPwHtKtA/exec", {
-        method: "POST",
-        body: JSON.stringify({ discord, age, about }),
-        headers: {
-          "Content-Type": "application/json",
-        },
+        const discord = document.getElementById("discord").value.trim();
+        const age = document.getElementById("age").value.trim();
+        const about = document.getElementById("about").value.trim();
+
+        if (!discord || !age || !about) {
+          alert('Пожалуйста, заполните все поля.');
+          return;
+        }
+
+        try {
+          const response = await fetch("https://script.google.com/macros/s/AKfycbwNxHT5yR_O-I7qOzxjwQI_bUyXw9f8cFun3jaz5TyGD8Au9nebaWA3cbasLBiPwHtKtA/exec", {
+            method: "POST",
+            body: JSON.stringify({ discord, age, about }),
+            headers: {
+              "Content-Type": "application/json",
+            },
+          });
+
+          if (response.ok) {
+            alert("✅ Заявка отправлена!");
+            closeModal();
+            form.reset();
+          } else {
+            alert("❌ Ошибка при отправке. Попробуйте позже.");
+          }
+        } catch (error) {
+          console.error("Ошибка отправки:", error);
+          alert("❌ Ошибка при отправке. Попробуйте позже.");
+        }
       });
-
-      if (response.ok) {
-        alert("✅ Заявка отправлена!");
-        closeModal();
-        document.getElementById("discord").value = "";
-        document.getElementById("age").value = "";
-        document.getElementById("about").value = "";
-      } else {
-        alert("❌ Ошибка при отправке. Попробуй позже.");
-      }
-    }
+    });
   </script>
 
 </body>
