@@ -4,7 +4,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Mirelle Family — Discord Fama</title>
-  <base href="http://www.example.com/mypage.html" rel="stylesheet">
   <style>
     :root {
       --bg: #0f0f1a;
@@ -110,7 +109,6 @@
       color: var(--muted);
     }
 
-    /* Modal Styles */
     .modal {
       display: none;
       position: fixed;
@@ -196,17 +194,14 @@
   <section>
     <h2>Состав</h2>
     <div class="card">
-    <p>
-  <strong>👑 Owners:</strong>
-  <span style="color: #ffffff;">
-    <a href="https://discord.com/users/311386777120407552" target="_blank" style="color: #b71cd5;"> Steve Mirelle</a> |
-    <a href="https://discord.com/users/1146906900751978637" target="_blank" style="color: #b71cd5;"> Hunter Mirelle</a>
-  </span>
-</p>
-
-      <p><strong>🛡 co. owner:</strong>
-      <a href="https://discord.com/users/613099862891692032" target="_blank" style="color: #b71cd5;"> Felix Mirelle</a></p>
-      <p><strong>🧠 DC Moderator:</strong><a href="https://discord.com/users/975428275071496233" target="_blank" style="color: #b71cd5;"> William Mirelle</a></p></p>
+      <p><strong>👑 Owners:</strong>
+        <a href="https://discord.com/users/311386777120407552" target="_blank" style="color: #b71cd5;">Steve Mirelle</a> |
+        <a href="https://discord.com/users/1146906900751978637" target="_blank" style="color: #b71cd5;">Hunter Mirelle</a>
+      </p>
+      <p><strong>🛡 Co. Owner:</strong>
+        <a href="https://discord.com/users/613099862891692032" target="_blank" style="color: #b71cd5;">Felix Mirelle</a></p>
+      <p><strong>🧠 DC Moderator:</strong>
+        <a href="https://discord.com/users/975428275071496233" target="_blank" style="color: #b71cd5;">William Mirelle</a></p>
     </div>
   </section>
 
@@ -215,8 +210,7 @@
     <div class="iframe-wrapper">
       <iframe
         src="https://discord.com/widget?id=1396078221463654460&theme=dark"
-        width="100%"
-        height="500"
+        width="100%" height="500"
         allowtransparency="true"
         frameborder="0"
         sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts">
@@ -234,16 +228,14 @@
       <span class="close" onclick="closeModal()">&times;</span>
       <h3>Заявка на вступление</h3>
       <form onsubmit="submitForm(event)">
-  <input type="text" placeholder="Твой ник в Discord" id="discord" required />
-  <input type="text" placeholder="Возраст" id="age" required />
-  <textarea placeholder="Расскажи о себе и опыте в RP" id="about" required></textarea>
-  <button type="submit" class="btn-discord">Отправить</button>
-</form>
+        <input type="text" placeholder="Твой ник в Discord" id="discord" required />
+        <input type="text" placeholder="Возраст" id="age" required />
+        <textarea placeholder="Расскажи о себе и опыте в RP" id="about" required></textarea>
+        <button type="submit" class="btn-discord">Отправить</button>
       </form>
     </div>
   </div>
 
-  <!-- JS -->
   <script>
     function openModal() {
       document.getElementById('applyModal').style.display = 'flex';
@@ -251,35 +243,36 @@
     function closeModal() {
       document.getElementById('applyModal').style.display = 'none';
     }
-
     function toggleTheme() {
       document.body.classList.toggle('light');
+    }
+
+    async function submitForm(e) {
+      e.preventDefault();
+      
+      const discord = document.getElementById("discord").value;
+      const age = document.getElementById("age").value;
+      const about = document.getElementById("about").value;
+
+      const response = await fetch("https://script.google.com/macros/s/AKfycbwNxHT5yR_O-I7qOzxjwQI_bUyXw9f8cFun3jaz5TyGD8Au9nebaWA3cbasLBiPwHtKtA/exec", {
+        method: "POST",
+        body: JSON.stringify({ discord, age, about }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (response.ok) {
+        alert("✅ Заявка отправлена!");
+        closeModal();
+        document.getElementById("discord").value = "";
+        document.getElementById("age").value = "";
+        document.getElementById("about").value = "";
+      } else {
+        alert("❌ Ошибка при отправке. Попробуй позже.");
+      }
     }
   </script>
 
 </body>
-<script>
-  async function submitForm(e) {
-    e.preventDefault();
-    
-    const discord = document.getElementById("discord").value;
-    const age = document.getElementById("age").value;
-    const about = document.getElementById("about").value;
-
-    const response = await fetch("https://script.google.com/macros/s/AKfycbwNxHT5yR_O-I7qOzxjwQI_bUyXw9f8cFun3jaz5TyGD8Au9nebaWA3cbasLBiPwHtKtA/exec", {
-      method: "POST",
-      body: JSON.stringify({ discord, age, about }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-
-    if (response.ok) {
-      alert("Заявка отправлена!");
-      closeModal();
-    } else {
-      alert("Ошибка отправки 😢");
-    }
-  }
-</script>
 </html>
