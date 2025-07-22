@@ -233,11 +233,12 @@
     <div class="modal-content">
       <span class="close" onclick="closeModal()">&times;</span>
       <h3>Заявка на вступление</h3>
-      <form onsubmit="alert('Заявка отправлена!'); closeModal(); return false;">
-        <input type="text" placeholder="Твой ник в Discord" required />
-        <input type="text" placeholder="Возраст" required />
-        <textarea placeholder="Расскажи о себе и опыте в RP" required></textarea>
-        <button type="submit" class="btn-discord">Отправить</button>
+      <form onsubmit="submitForm(event)">
+  <input type="text" placeholder="Твой ник в Discord" id="discord" required />
+  <input type="text" placeholder="Возраст" id="age" required />
+  <textarea placeholder="Расскажи о себе и опыте в RP" id="about" required></textarea>
+  <button type="submit" class="btn-discord">Отправить</button>
+</form>
       </form>
     </div>
   </div>
@@ -257,4 +258,28 @@
   </script>
 
 </body>
+<script>
+  async function submitForm(e) {
+    e.preventDefault();
+    
+    const discord = document.getElementById("discord").value;
+    const age = document.getElementById("age").value;
+    const about = document.getElementById("about").value;
+
+    const response = await fetch("https://script.google.com/macros/s/AKfycbwNxHT5yR_O-I7qOzxjwQI_bUyXw9f8cFun3jaz5TyGD8Au9nebaWA3cbasLBiPwHtKtA/exec", {
+      method: "POST",
+      body: JSON.stringify({ discord, age, about }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (response.ok) {
+      alert("Заявка отправлена!");
+      closeModal();
+    } else {
+      alert("Ошибка отправки 😢");
+    }
+  }
+</script>
 </html>
