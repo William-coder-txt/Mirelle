@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mirelle Family — Discord Fama</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0f0f1a;
+      --text: #e0e0e0;
+      --card: #1a1a2e;
+      --accent: #a55eff;
+      --btn: #5865F2;
+      --muted: #aaa;
+    }
+
+    body.light {
+      --bg: #f5f5f5;
+      --text: #111;
+      --card: #ffffff;
+      --accent: #7428e6;
+      --btn: #5865F2;
+      --muted: #666;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Montserrat', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      transition: 0.3s all ease;
+    }
+
+    header {
+      text-align: center;
+      padding: 60px 20px;
+      background: linear-gradient(to right, #4b0082, #8e2de2);
+      color: white;
+    }
+
+    header img.logo {
+      width: 100px;
+      height: 100px;
+      object-fit: contain;
+      border-radius: 50%;
+      margin-bottom: 15px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+    }
+
+    header h1 {
+      font-size: 3rem;
+      margin: 0;
+      font-weight: 800;
+    }
+
+    header p {
+      font-size: 1.2rem;
+      margin: 10px 0 25px;
+    }
+
+    .btn-discord, .btn-apply, .btn-toggle {
+      padding: 14px 26px;
+      background-color: var(--btn);
+      color: white;
+      text-decoration: none;
+      border-radius: 10px;
+      font-weight: bold;
+      margin: 10px 5px;
+      cursor: pointer;
+      border: none;
+      transition: 0.3s;
+    }
+
+    .btn-discord:hover, .btn-apply:hover, .btn-toggle:hover {
+      filter: brightness(1.1);
+    }
+
+    section {
+      padding: 50px 20px;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    section h2 {
+      font-size: 2rem;
+      color: var(--accent);
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .card {
+      background-color: var(--card);
+      padding: 25px;
+      border-radius: 15px;
+      margin-bottom: 30px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    }
+
+    .iframe-wrapper {
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 0 20px rgba(165, 94, 255, 0.2);
+    }
+
+    footer {
+      background-color: #13131f;
+      text-align: center;
+      padding: 30px;
+      color: var(--muted);
+    }
+
+    /* Modal Styles */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 10;
+      left: 0; top: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.7);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-content {
+      background: var(--card);
+      padding: 30px;
+      border-radius: 15px;
+      width: 90%;
+      max-width: 500px;
+      color: var(--text);
+    }
+
+    .modal-content h3 {
+      margin-top: 0;
+      color: var(--accent);
+    }
+
+    .modal-content input, .modal-content textarea {
+      width: 100%;
+      padding: 12px;
+      margin-top: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      background: #fff;
+      color: #000;
+    }
+
+    .close {
+      float: right;
+      font-size: 1.5em;
+      cursor: pointer;
+      color: var(--muted);
+    }
+
+    @media (max-width: 768px) {
+      header h1 { font-size: 2rem; }
+      .btn-discord, .btn-apply, .btn-toggle {
+        padding: 10px 18px;
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <img src="https://i.yapx.ru/aAXrP.png" class="logo"/>
+    <h1>Mirelle Family</h1>
+    <p>Добро пожаловать в элитную фаму Majestic RP</p>
+    <a href="https://discord.gg/FRaZCECpeh" class="btn-discord" target="_blank">Вступить в Discord</a>
+    <button class="btn-apply" onclick="openModal()">Подать заявку</button>
+    <button class="btn-toggle" onclick="toggleTheme()">🌙/☀️</button>
+  </header>
+
+  <section>
+    <h2>О нас</h2>
+    <div class="card">
+      <p>Mirelle — это семья, где правит уважение, дисциплина и актив. Мы играем на Majestic RP, держим территорию, идём к топу. Наш стиль — порядок. Наша сила — сплочённость.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Правила</h2>
+    <div class="card">
+      <ul>
+        <li>🔹 Уважай участников и администрацию</li>
+        <li>🔹 Запрещены провокации, токсичность, читерство</li>
+        <li>🔹 Соблюдай RP и правила проекта Majestic</li>
+        <li>🔹 Не допускается слив или мета-гейм</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <h2>Состав</h2>
+    <div class="card">
+    <p>
+  <strong>👑 Owners:</strong>
+  <span style="color: #ffffff;">
+    <a href="https://discord.com/users/311386777120407552" target="_blank" style="color: #b71cd5;"> Steve Mirelle</a> |
+    <a href="https://discord.com/users/1146906900751978637" target="_blank" style="color: #b71cd5;"> Hunter Mirelle</a>
+  </span>
+</p>
+
+      <p><strong>🛡 co. owner:</strong>
+      <a href="https://discord.com/users/613099862891692032" target="_blank" style="color: #b71cd5;"> Felix Mirelle</a></p>
+      <p><strong>🧠 DC Moderator:</strong><a href="https://discord.com/users/975428275071496233" target="_blank" style="color: #b71cd5;"> William Mirelle</a></p></p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Наш Discord</h2>
+    <div class="iframe-wrapper">
+      <iframe
+        src="https://discord.com/widget?id=1396078221463654460&theme=dark"
+        width="100%"
+        height="500"
+        allowtransparency="true"
+        frameborder="0"
+        sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts">
+      </iframe>
+    </div>
+  </section>
+
+  <footer>
+    &copy; 2025 Mirelle Family — Все права защищены | w.msitreltlaem@gmail.com
+  </footer>
+
+  <!-- Модальное окно -->
+  <div class="modal" id="applyModal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <h3>Заявка на вступление</h3>
+      <form onsubmit="alert('Заявка отправлена!'); closeModal(); return false;">
+        <input type="text" placeholder="Твой ник в Discord" required />
+        <input type="text" placeholder="Возраст" required />
+        <textarea placeholder="Расскажи о себе и опыте в RP" required></textarea>
+        <button type="submit" class="btn-discord">Отправить</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- JS -->
+  <script>
+    function openModal() {
+      document.getElementById('applyModal').style.display = 'flex';
+    }
+    function closeModal() {
+      document.getElementById('applyModal').style.display = 'none';
+    }
+
+    function toggleTheme() {
+      document.body.classList.toggle('light');
+    }
+  </script>
+
+</body>
+</html>
