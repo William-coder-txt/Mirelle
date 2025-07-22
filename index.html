@@ -29,12 +29,7 @@
       font-family: 'Montserrat', sans-serif;
       background-color: var(--bg);
       color: var(--text);
-      opacity: 0;
-      transition: background-color 0.5s ease, color 0.5s ease, opacity 1s ease;
-    }
-
-    body.loaded {
-      opacity: 1;
+      transition: background-color 0.5s ease, color 0.5s ease;
     }
 
     header {
@@ -51,20 +46,17 @@
       border-radius: 50%;
       margin-bottom: 15px;
       box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
-      transition: transform 0.3s ease;
     }
 
     header h1 {
       font-size: 3rem;
       margin: 0;
       font-weight: 800;
-      transition: color 0.5s ease;
     }
 
     header p {
       font-size: 1.2rem;
       margin: 10px 0 25px;
-      transition: color 0.5s ease;
     }
 
     .btn-discord, .btn-toggle {
@@ -78,7 +70,15 @@
       cursor: pointer;
       border: none;
       display: inline-block;
-      transition: background-color 0.3s ease, color 0.3s ease;
+      transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+    }
+
+    .btn-toggle {
+      font-size: 1.2rem;
+    }
+
+    .btn-toggle:active {
+      transform: rotate(180deg);
     }
 
     .btn-discord:hover, .btn-toggle:hover {
@@ -118,6 +118,10 @@
 
     @media (max-width: 768px) {
       .iframe-wrapper {
+        display: none;
+      }
+
+      #discord-title {
         display: none;
       }
 
@@ -213,9 +217,10 @@
   </section>
 
   <section>
-    <h2>Наш Discord</h2>
+    <h2 id="discord-title">Наш Discord</h2>
     <div class="iframe-wrapper">
       <iframe
+        id="discord-widget"
         src="https://discord.com/widget?id=1396078221463654460&theme=dark"
         width="100%" height="500"
         allowtransparency="true"
@@ -230,22 +235,31 @@
   </footer>
 
   <script>
-    // Смена темы с сохранением
-    function toggleTheme() {
-      const isLight = document.body.classList.toggle('light');
-      localStorage.setItem('theme', isLight ? 'light' : 'dark');
+    const body = document.body;
+    const widget = document.getElementById('discord-widget');
+
+    function setTheme(theme) {
+      if (theme === 'light') {
+        body.classList.add('light');
+        widget.src = widget.src.replace('theme=dark', 'theme=light');
+      } else {
+        body.classList.remove('light');
+        widget.src = widget.src.replace('theme=light', 'theme=dark');
+      }
+      localStorage.setItem('theme', theme);
     }
 
-    // Загрузка темы и плавный запуск
-    window.addEventListener('DOMContentLoaded', () => {
-      const savedTheme = localStorage.getItem('theme');
-      if (savedTheme === 'light') {
-        document.body.classList.add('light');
-      }
-    });
+    function toggleTheme() {
+      const isLight = body.classList.contains('light');
+      setTheme(isLight ? 'dark' : 'light');
+    }
 
-    window.addEventListener('load', () => {
-      document.body.classList.add('loaded');
+    // Инициализация темы при загрузке
+    window.addEventListener('DOMContentLoaded', () => {
+      const saved = localStorage.getItem('theme');
+      const systemPrefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+      const theme = saved || (systemPrefersLight ? 'light' : 'dark');
+      setTheme(theme);
     });
   </script>
 
