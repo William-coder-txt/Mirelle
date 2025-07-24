@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
+  <!-- Иконка сайта -->
+  <link rel="icon" href="лого (1).png" type="image/png" />
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Mirelle Family — Discord Fama</title>
-  <link rel="icon" href="лого (1).png" type="image/png" />
 
   <style>
     :root {
@@ -14,7 +15,6 @@
       --accent: #a55eff;
       --btn: #5865F2;
       --muted: #aaa;
-      --link-color: #ffffff;
     }
 
     body.light {
@@ -24,7 +24,6 @@
       --accent: #7428e6;
       --btn: #5865F2;
       --muted: #666;
-      --link-color: #0000cc;
     }
 
     body {
@@ -65,8 +64,11 @@
       margin: 0 auto 15px;
       box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
       display: block;
+      transform: none !important;
+      opacity: 1 !important;
     }
 
+    /* Навигация */
     .nav-menu {
       display: flex;
       justify-content: center;
@@ -110,8 +112,18 @@
       font-size: 3rem;
       margin: 0;
       font-weight: 800;
+      opacity: 0;
+      transform: translateY(20px);
       animation: fadeInUp 0.8s forwards ease-out;
+      transition: text-shadow 0.3s ease, transform 0.15s ease;
+      cursor: default;
+      display: inline-block;
       user-select: none;
+    }
+
+    header h1:hover {
+      text-shadow: 0 0 8px var(--accent), 0 0 12px var(--accent), 0 0 15px var(--accent);
+      transform: translateY(0) scale(1.05);
     }
 
     @keyframes fadeInUp {
@@ -138,15 +150,25 @@
       border: none;
       display: inline-block;
       transition: box-shadow 0.3s ease, transform 0.15s ease;
+      will-change: transform;
     }
 
     .btn-discord:hover, .btn-toggle:hover {
+      filter: none;
       box-shadow: 0 0 10px var(--accent);
       transform: scale(1.05);
     }
 
-    .btn-discord:active, .btn-toggle:active {
+    .btn-discord:active {
       transform: scale(0.95);
+      box-shadow: 0 0 5px var(--accent);
+      transition: transform 0.1s ease;
+    }
+
+    .btn-toggle:active {
+      transform: scale(1.2) rotate(20deg);
+      box-shadow: 0 0 5px var(--accent);
+      transition: transform 0.1s ease;
     }
 
     section {
@@ -168,6 +190,7 @@
       border-radius: 15px;
       margin-bottom: 30px;
       box-shadow: 0 0 15px rgba(0,0,0,0.2);
+      transition: background-color 0.5s ease, color 0.5s ease;
       opacity: 0;
       transform: translateY(30px);
       transition: opacity 0.6s ease-out, transform 0.6s ease-out;
@@ -179,12 +202,20 @@
     }
 
     .card a {
+      color: inherit;
       text-decoration: underline;
-      transition: transform 0.15s ease;
+      transition: box-shadow 0.3s ease, transform 0.15s ease;
     }
 
     .card a:hover {
+      box-shadow: 0 0 10px var(--accent);
       transform: scale(1.05);
+    }
+
+    .card a:active {
+      transform: scale(0.95);
+      box-shadow: 0 0 5px var(--accent);
+      transition: transform 0.1s ease;
     }
 
     .iframe-wrapper {
@@ -220,16 +251,6 @@
       background-color: #7428e6;
     }
 
-    .theme-link {
-      color: var(--link-color);
-      text-decoration: underline;
-      transition: color 0.3s ease;
-    }
-
-    .theme-link:hover {
-      filter: brightness(1.2);
-    }
-
     @media (max-width: 768px) {
       .iframe-wrapper { display: none; }
       header h1 { font-size: 2rem; }
@@ -247,15 +268,19 @@
       text-align: center;
       padding: 30px;
       color: var(--muted);
+      transition: color 0.5s ease, background-color 0.5s ease;
     }
   </style>
 </head>
 
 <body>
+
   <div id="particles-js"></div>
 
   <header>
     <img src="https://i.yapx.ru/aAXrP.png" class="logo" alt="Mirelle Family Logo"/>
+    
+    <!-- Навигация -->
     <nav class="nav-menu">
       <a href="#about">О нас</a>
       <a href="#rules">Правила</a>
@@ -294,18 +319,16 @@
     <h2>Состав</h2>
     <div class="card">
       <p><strong>👑 Owners:</strong>
-        <a href="https://discord.com/users/311386777120407552" target="_blank" rel="noopener noreferrer" style="color: #8b00ff;">Steve Mirelle</a> |
-        <a href="https://discord.com/users/1146906900751978637" target="_blank" rel="noopener noreferrer" style="color: #8b00ff;">Hunter Mirelle</a>
+        <a href="https://discord.com/users/311386777120407552" target="_blank" rel="noopener noreferrer" style="color: #b71cd5;">Steve Mirelle</a> |
+        <a href="https://discord.com/users/1146906900751978637" target="_blank" rel="noopener noreferrer" style="color: #b71cd5;">Hunter Mirelle</a>
       </p>
       <p><strong>🛡 Co. Owner:</strong>
-        <a href="https://discord.com/users/613099862891692032" target="_blank" rel="noopener noreferrer" style="color: #5b209a;">Felix Mirelle</a></p>
-      <p><strong>👥High:</strong>
-        <a href="https://discord.com/users/975428275071496233" target="_blank" rel="noopener noreferrer" style="color: #9656ce;">William Mirelle</a> |
-        <a href="https://discord.com/users/853764285054451732" target="_blank" rel="noopener noreferrer" style="color: #9656ce;">Amber Mirelle</a> |
-        <a href="https://discord.com/users/895378626445475841" target="_blank" rel="noopener noreferrer" style="color: #9656ce;">Oliver Mirelle</a></p>
- <p><strong>🎥 Media:</strong>
-        <a href="https://discord.com/users/919323073335943238" target="_blank" rel="noopener noreferrer" style="color: #00dbff;">Allexo Mirelle</a></p>     
-      </div>
+        <a href="https://discord.com/users/613099862891692032" target="_blank" rel="noopener noreferrer" style="color: #b71cd5;">Felix Mirelle</a></p>
+      <p><strong>🧠 DC Moderator:</strong>
+        <a href="https://discord.com/users/975428275071496233" target="_blank" rel="noopener noreferrer" style="color: #b71cd5;">William Mirelle</a></p>
+      <p><strong>🎥 Media:</strong>
+        <a href="https://discord.com/users/919323073335943238" target="_blank" rel="noopener noreferrer" style="color: #b71cd5;">Allexo Mirelle</a></p>
+    </div>
   </section>
 
   <section id="apply">
@@ -315,7 +338,7 @@
         После входа на Discord сервер, необходимо пройти 
         <a href="https://discord.com/channels/1396095479502078022" target="_blank" rel="noopener noreferrer" style="color: #48c25f;">✅ verification</a>, 
         после чего перейти в канал 
-        <a href="https://discord.com/channels/1396110040728993934" target="_blank" rel="noopener noreferrer" class="theme-link">🖋️ joining-a-family</a> 
+        <a href="https://discord.com/channels/1396110040728993934" target="_blank" rel="noopener noreferrer" style="color: #ffffff;">🖋️ joining-a-family</a> 
         и подать там заявку.
       </p>
     </div>
@@ -324,17 +347,21 @@
   <section>
     <h2 class="discord-title">Наш Discord</h2>
     <div class="iframe-wrapper">
-      <iframe src="https://discord.com/widget?id=1396078221463654460&theme=dark"
-              width="100%" height="500" allowtransparency="true"
-              frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts">
+      <iframe
+        src="https://discord.com/widget?id=1396078221463654460&theme=dark"
+        width="100%" height="500"
+        allowtransparency="true"
+        frameborder="0"
+        sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts">
       </iframe>
     </div>
   </section>
 
-  <button id="scrollToTop" title="Наверх"> ⇪ </button>
+  <button id="scrollToTop" title="Наверх">⬆️</button>
 
   <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
   <script>
+    // Конфиг для частиц
     particlesJS("particles-js", {
       particles: {
         number: { value: 80, density: { enable: true, value_area: 800 } },
@@ -369,36 +396,42 @@
       retina_detect: true
     });
 
+    // Плавное появление карточек при прокрутке
     function revealOnScroll() {
       const cards = document.querySelectorAll('.card');
       const windowHeight = window.innerHeight;
       cards.forEach(card => {
         const cardTop = card.getBoundingClientRect().top;
-        if (cardTop < windowHeight - 100) {
+        if(cardTop < windowHeight - 100) {
           card.classList.add('visible');
         }
       });
     }
-
     window.addEventListener('scroll', revealOnScroll);
     window.addEventListener('load', revealOnScroll);
 
+    // Кнопка "Наверх"
     const scrollBtn = document.getElementById('scrollToTop');
     window.addEventListener('scroll', () => {
-      if (window.scrollY > 400) {
+      if(window.scrollY > 400) {
         scrollBtn.classList.add('visible');
       } else {
         scrollBtn.classList.remove('visible');
       }
     });
     scrollBtn.addEventListener('click', () => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      window.scrollTo({top: 0, behavior: 'smooth'});
     });
 
+    // Переключение светлой/тёмной темы
     const themeToggleBtn = document.getElementById('themeToggleBtn');
     themeToggleBtn.addEventListener('click', () => {
       document.body.classList.toggle('light');
-      themeToggleBtn.textContent = document.body.classList.contains('light') ? '🌞' : '🌙';
+      if(document.body.classList.contains('light')) {
+        themeToggleBtn.textContent = '🌞';
+      } else {
+        themeToggleBtn.textContent = '🌙';
+      }
     });
   </script>
 </body>
