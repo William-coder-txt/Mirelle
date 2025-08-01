@@ -5,7 +5,7 @@
   <link rel="icon" href="favicon.png" type="image/png" />
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title> Mirelle Majestic</title>
+
 
   <style>
     :root {
@@ -523,9 +523,17 @@ body.intro-complete #intro {
     });
     // Анимация интро при загрузке
 window.addEventListener('load', () => {
-  setTimeout(() => {
+  const isMobile = /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+  
+  if (!isMobile) {
+    // На ПК — проигрываем анимацию
+    setTimeout(() => {
+      document.body.classList.add('intro-complete');
+    }, 3500);
+  } else {
+    // На телефонах — сразу скрываем интро
     document.body.classList.add('intro-complete');
-  }, 3500); // длительность: 3.5 секунды
+  }
 });
   </script>
 </body>
